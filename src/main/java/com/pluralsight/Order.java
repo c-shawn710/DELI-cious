@@ -1,5 +1,7 @@
 package com.pluralsight;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -56,5 +58,16 @@ public class Order {
     }
 
     //Save order to a CSV file
-
+    public void saveToCSV() {
+        try (FileWriter writer = new FileWriter("receipt.csv")) {
+            writer.write("Order Receipt\n");
+            for (Orderable item : items) {
+                writer.write(item.getDescription() + "\n");
+            }
+            writer.write("Total Price: $" + String.format("%.2f", calculateTotalPrice() + "\n"));
+            System.out.println("Printing receipt...");
+        } catch (IOException e) {
+            System.out.println("ERROR");
+        }
+    }
 }
