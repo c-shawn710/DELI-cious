@@ -7,12 +7,12 @@ public class Chips implements Orderable {
 
     @Override
     public double getPrice() {
-        return 0;
+        return 1.50;
     }
 
     @Override
     public String getDescription() {
-        return "";
+        return "Chips: " + type;
     }
 
     @Override
