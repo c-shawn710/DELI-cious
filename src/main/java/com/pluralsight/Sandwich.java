@@ -82,7 +82,7 @@ public class Sandwich implements Orderable {
                      "- Mustard\n" +
                      "- Ketchup\n" +
                      "- Ranch\n" +
-                     "- Thousand Sslands\n" +
+                     "- Thousand Islands\n" +
                      "- Vinaigrette");
 
         String sauce;
