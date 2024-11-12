@@ -7,11 +7,13 @@ import java.util.Scanner;
 public class Sandwich implements Orderable {
     private String breadType;
     private String size;
+    private String meat;
     private String cheese;
-    private final List<String> meats = new ArrayList<>();
     private final List<String> toppings = new ArrayList<>();
     private final List<String> sauces = new ArrayList<>();
     private boolean toasted;
+    private boolean extraMeat;
+    private boolean extraCheese;
 
     public void setBreadType(String breadType) {
         this.breadType = breadType;
@@ -19,6 +21,10 @@ public class Sandwich implements Orderable {
 
     public void setSize(String size) {
         this.size = size;
+    }
+
+    public void setMeat(String meat) {
+        this.meat = meat;
     }
 
     public void setCheese(String cheese) {
@@ -29,12 +35,15 @@ public class Sandwich implements Orderable {
         this.toasted = toasted;
     }
 
-
-    //custom methods
-    public void addMeat (String meat) {
-        meats.add(meat);
+    public void setExtraMeat(boolean extraMeat) {
+        this.extraMeat = extraMeat;
     }
 
+    public void setExtraCheese(boolean extraCheese) {
+        this.extraCheese = extraCheese;
+    }
+
+    //custom methods
     public void addTopping(String topping) {
         toppings.add(topping);
     }
@@ -48,10 +57,28 @@ public class Sandwich implements Orderable {
         double price = 0;
         if (size.equalsIgnoreCase("small")) {
             price = 5.50;
+            if (extraMeat) {
+                price += 0.50;
+            }
+            if (extraCheese) {
+                price += 0.30;
+            }
         } else if (size.equalsIgnoreCase("medium")) {
             price = 7.00;
+            if (extraMeat) {
+                price += 1.00;
+            }
+            if (extraCheese) {
+                price += 0.60;
+            }
         } else if (size.equalsIgnoreCase("large")) {
             price = 8.50;
+            if (extraMeat) {
+                price += 1.50;
+            }
+            if (extraCheese) {
+                price += 0.90;
+            }
         }
         return price;
     }
@@ -59,8 +86,10 @@ public class Sandwich implements Orderable {
     @Override
     public String getDescription() {
         return "Sandwich - " + size + ", " + breadType + (toasted ? ", toasted" : "") +
-                "\nMeat: " + meats +
-                "\nCheese: " + cheese +
+                "\nMeat: " + meat +
+                "\nCheese: " + (cheese != null ? cheese : "None") +
+                (extraMeat ? "\nExtra Meat" : "") +
+                (extraCheese ? "\nExtra Cheese" : "") +
                 "\nToppings: " + toppings +
                 "\nSauces: " + sauces;
     }
@@ -73,22 +102,26 @@ public class Sandwich implements Orderable {
         System.out.println("Choose size: Small(4\") - $5.50, Medium(8\") - $7.00, Large(12\") - $8.50");
         setSize(scanner.nextLine());
 
-        System.out.println("Select protein: Type 'Done' to finish\n" +
+        //Meat option
+        System.out.println("Select protein: Or type 'none' for no meat\n" +
                 "- Steak\n" +
                 "- Ham\n" +
                 "- Salami\n" +
                 "- Roast Beef\n" +
                 "- Chicken\n" +
                 "- Bacon");
-        while (true) {
-            String meat = scanner.nextLine();
-            if (meat.equalsIgnoreCase("done")) {
-                break;
-            } else {
-                addMeat(meat);
-            }
+        String meat = scanner.nextLine();
+        if (!meat.equalsIgnoreCase("none")) {
+            setMeat(meat);
+            //Prompt user for extra meat if meat is selected
+            System.out.println("Would you like extra meat? (Y / N)\n" +
+                    "Small - $0.50\n" +
+                    "Medium - $1.00\n" +
+                    "Large - $1.50");
+            setExtraMeat(scanner.nextLine().equalsIgnoreCase("y"));
         }
 
+        //Cheese option
         System.out.println("Select cheese: Or type 'none' for no cheese\n" +
                 "- American\n" +
                 "- Provolone\n" +
@@ -97,8 +130,15 @@ public class Sandwich implements Orderable {
         String cheese = scanner.nextLine();
         if (!cheese.equalsIgnoreCase("none")) {
             setCheese(cheese);
+            //Prompt user for extra cheese if cheese is selected
+            System.out.println("Would you like extra cheese? (Y / N)\n" +
+                    "Small - $0.30\n" +
+                    "Medium - $0.60\n" +
+                    "Large - $0.90");
+            setExtraCheese(scanner.nextLine().equalsIgnoreCase("y"));
         }
 
+        //Add toppings
         String topping;
         do {
             System.out.println("Add toppings: Type 'Done' to finish\n" +
