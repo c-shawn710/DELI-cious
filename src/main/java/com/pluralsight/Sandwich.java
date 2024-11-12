@@ -10,6 +10,7 @@ public class Sandwich implements Orderable {
     private String meat;
     private String cheese;
     private final List<String> toppings = new ArrayList<>();
+    private final List<String> extraToppings = new ArrayList<>();
     private final List<String> sauces = new ArrayList<>();
     private boolean toasted;
     private boolean extraMeat;
@@ -46,6 +47,10 @@ public class Sandwich implements Orderable {
     //custom methods
     public void addTopping(String topping) {
         toppings.add(topping);
+    }
+
+    public void addExtraToppings(String topping) {
+        extraToppings.add(topping);
     }
 
     public void addSauce(String sauce) {
@@ -86,11 +91,12 @@ public class Sandwich implements Orderable {
     @Override
     public String getDescription() {
         return "Sandwich - " + size + ", " + breadType + (toasted ? ", toasted" : "") +
-                "\nMeat: " + meat +
+                "\nMeat: " + (meat != null ? meat : "None") +
                 "\nCheese: " + (cheese != null ? cheese : "None") +
                 (extraMeat ? "\nExtra Meat" : "") +
                 (extraCheese ? "\nExtra Cheese" : "") +
                 "\nToppings: " + toppings +
+                "\nExtra Toppings: " + extraToppings +
                 "\nSauces: " + sauces;
     }
 
@@ -138,26 +144,50 @@ public class Sandwich implements Orderable {
             setExtraCheese(scanner.nextLine().equalsIgnoreCase("y"));
         }
 
+        //Toasted?
+        System.out.println("Would you like the sandwich toasted? (yes/no):");
+        setToasted(scanner.nextLine().equalsIgnoreCase("yes"));
+
         //Add toppings
+        System.out.println("Add toppings: Type 'Done' to finish\n" +
+                "- Lettuce\n" +
+                "- Peppers\n" +
+                "- Onions\n" +
+                "- Tomatoes\n" +
+                "- Jalepenos\n" +
+                "- Cucumbers\n" +
+                "- Pickles\n" +
+                "- Guacamole\n" +
+                "- Mushrooms");
+
         String topping;
         do {
-            System.out.println("Add toppings: Type 'Done' to finish\n" +
-                    "- Lettuce\n" +
-                    "- Peppers\n" +
-                    "- Onions\n" +
-                    "- Tomatoes\n" +
-                    "- Jalepenos\n" +
-                    "- Cucumbers\n" +
-                    "- Pickles\n" +
-                    "- Guacamole\n" +
-                    "- Mushrooms");
-
             topping = scanner.nextLine();
             if (!topping.equalsIgnoreCase("done")) {
                 addTopping(topping);
             }
         } while (!topping.equalsIgnoreCase("done"));
 
+        //Extra toppings
+        System.out.println("Would you like any extra toppings?: Type 'Done' to finish\n" +
+                "- Lettuce\n" +
+                "- Peppers\n" +
+                "- Onions\n" +
+                "- Tomatoes\n" +
+                "- Jalepenos\n" +
+                "- Cucumbers\n" +
+                "- Pickles\n" +
+                "- Guacamole\n" +
+                "- Mushrooms");
+
+        do {
+            topping = scanner.nextLine();
+            if (!topping.equalsIgnoreCase("done")) {
+                addExtraToppings(topping);
+            }
+        } while (!topping.equalsIgnoreCase("done"));
+
+        // Add Sauces
         System.out.println("Add sauces: Type 'Done' to finish\n" +
                      "- Mayo\n" +
                      "- Mustard\n" +
@@ -173,9 +203,6 @@ public class Sandwich implements Orderable {
                 addSauce(sauce);
             }
         } while (!sauce.equalsIgnoreCase("done"));
-
-        System.out.println("Would you like the sandwich toasted? (yes/no):");
-        setToasted(scanner.nextLine().equalsIgnoreCase("yes"));
     }
 }
 
