@@ -7,6 +7,8 @@ import java.util.Scanner;
 public class Sandwich implements Orderable {
     private String breadType;
     private String size;
+    private String cheese;
+    private final List<String> meats = new ArrayList<>();
     private final List<String> toppings = new ArrayList<>();
     private final List<String> sauces = new ArrayList<>();
     private boolean toasted;
@@ -19,11 +21,20 @@ public class Sandwich implements Orderable {
         this.size = size;
     }
 
+    public void setCheese(String cheese) {
+        this.cheese = cheese;
+    }
+
     public void setToasted(boolean toasted) {
         this.toasted = toasted;
     }
 
+
     //custom methods
+    public void addMeat (String meat) {
+        meats.add(meat);
+    }
+
     public void addTopping(String topping) {
         toppings.add(topping);
     }
@@ -47,7 +58,11 @@ public class Sandwich implements Orderable {
 
     @Override
     public String getDescription() {
-        return "Sandwich - " + size + ", " + breadType + (toasted ? ", toasted" : "") + "\nToppings: " + toppings + "\nSauces: " + sauces;
+        return "Sandwich - " + size + ", " + breadType + (toasted ? ", toasted" : "") +
+                "\nMeat: " + meats +
+                "\nCheese: " + cheese +
+                "\nToppings: " + toppings +
+                "\nSauces: " + sauces;
     }
 
     @Override
@@ -57,6 +72,32 @@ public class Sandwich implements Orderable {
 
         System.out.println("Choose size: Small(4\") - $5.50, Medium(8\") - $7.00, Large(12\") - $8.50");
         setSize(scanner.nextLine());
+
+        System.out.println("Select protein: Type 'Done' to finish\n" +
+                "- Steak\n" +
+                "- Ham\n" +
+                "- Salami\n" +
+                "- Roast Beef\n" +
+                "- Chicken\n" +
+                "- Bacon");
+        while (true) {
+            String meat = scanner.nextLine();
+            if (meat.equalsIgnoreCase("done")) {
+                break;
+            } else {
+                addMeat(meat);
+            }
+        }
+
+        System.out.println("Select cheese: Or type 'none' for no cheese\n" +
+                "- American\n" +
+                "- Provolone\n" +
+                "- Cheddar\n" +
+                "- Swiss");
+        String cheese = scanner.nextLine();
+        if (!cheese.equalsIgnoreCase("none")) {
+            setCheese(cheese);
+        }
 
         String topping;
         do {
