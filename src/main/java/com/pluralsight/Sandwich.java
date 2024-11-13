@@ -108,6 +108,21 @@ public class Sandwich implements Orderable {
         System.out.println("Choose size: Small(4\") - $5.50, Medium(8\") - $7.00, Large(12\") - $8.50");
         setSize(scanner.nextLine());
 
+        //Determine additional fee for extra meat/cheese depending on selected size
+        double extraMeat = 0;
+        double extraCheese = 0;
+
+        if (size.equalsIgnoreCase("small")) {
+            extraMeat = 0.50;
+            extraCheese = 0.30;
+        } else if (size.equalsIgnoreCase("medium")) {
+            extraMeat = 1.00;
+            extraCheese = 0.60;
+        } else if (size.equalsIgnoreCase("large")) {
+            extraMeat = 1.50;
+            extraCheese = 0.90;
+        }
+
         //Meat option
         System.out.println("Select protein: Or type 'none' for no meat\n" +
                 "- Steak\n" +
@@ -120,10 +135,7 @@ public class Sandwich implements Orderable {
         if (!meat.equalsIgnoreCase("none")) {
             setMeat(meat);
             //Prompt user for extra meat if meat is selected
-            System.out.println("Would you like extra meat? (Y / N)\n" +
-                    "Small - $0.50\n" +
-                    "Medium - $1.00\n" +
-                    "Large - $1.50");
+            System.out.printf("Would you like extra meat for $%.2f? (Y / N)\n", extraMeat);
             setExtraMeat(scanner.nextLine().equalsIgnoreCase("y"));
         }
 
@@ -137,16 +149,13 @@ public class Sandwich implements Orderable {
         if (!cheese.equalsIgnoreCase("none")) {
             setCheese(cheese);
             //Prompt user for extra cheese if cheese is selected
-            System.out.println("Would you like extra cheese? (Y / N)\n" +
-                    "Small - $0.30\n" +
-                    "Medium - $0.60\n" +
-                    "Large - $0.90");
+            System.out.printf("Would you like extra cheese for $%.2f? (Y / N)\n", extraCheese);
             setExtraCheese(scanner.nextLine().equalsIgnoreCase("y"));
         }
 
         //Toasted?
-        System.out.println("Would you like the sandwich toasted? (yes/no):");
-        setToasted(scanner.nextLine().equalsIgnoreCase("yes"));
+        System.out.println("Would you like the sandwich toasted? (Y / N):");
+        setToasted(scanner.nextLine().equalsIgnoreCase("y"));
 
         //Add toppings
         System.out.println("Add toppings: Type 'Done' to finish\n" +
@@ -169,16 +178,12 @@ public class Sandwich implements Orderable {
         } while (!topping.equalsIgnoreCase("done"));
 
         //Extra toppings
-        System.out.println("Would you like any extra toppings?: Type 'Done' to finish\n" +
-                "- Lettuce\n" +
-                "- Peppers\n" +
-                "- Onions\n" +
-                "- Tomatoes\n" +
-                "- Jalepenos\n" +
-                "- Cucumbers\n" +
-                "- Pickles\n" +
-                "- Guacamole\n" +
-                "- Mushrooms");
+        if (!toppings.isEmpty()) {
+            System.out.println("Would you like any extra toppings?: Type 'Done' to finish");
+            for (String selectedTopping : toppings) {
+                System.out.println("- " + selectedTopping.substring(0, 1).toUpperCase() + selectedTopping.substring(1));
+            }
+        }
 
         do {
             topping = scanner.nextLine();

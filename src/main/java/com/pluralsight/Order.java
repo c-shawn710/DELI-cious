@@ -2,6 +2,9 @@ package com.pluralsight;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -9,7 +12,7 @@ import java.util.Scanner;
 public class Order {
     private final List<Orderable> items = new ArrayList<>();
 
-    //Add a Sandwich to the order
+    //Add one or more Sandwiches to the order
     public void addSandwich(Scanner scanner) {
         Sandwich sandwich = new Sandwich();
         sandwich.customizeItem(scanner);
@@ -57,17 +60,22 @@ public class Order {
         return orderDetails.toString();
     }
 
-    //Save order to a CSV file
+    //Save order to a receipts file
     public void saveToCSV() {
-        try (FileWriter writer = new FileWriter("receipt.csv")) {
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyyMMdd-HHmmss");
+        String timestamp = now.format(dateFormatter);
+
+        try (FileWriter writer = new FileWriter("receipts.txt", true)) {
+            writer.write("Order placed at: " + timestamp + "\n");
             writer.write("Order Receipt\n");
             for (Orderable item : items) {
                 writer.write(item.getDescription() + "\n");
             }
-            writer.write("Total Price: $" + String.format("%.2f", calculateTotalPrice() + "\n"));
-            System.out.println("Printing receipt...");
+            writer.write(String.format("Total Price: $%.2f", calculateTotalPrice()));
+            writer.write("\n-----------------------------\n");
         } catch (IOException e) {
-            System.out.println("ERROR");
+            System.out.println("Error saving order...");;
         }
     }
 }

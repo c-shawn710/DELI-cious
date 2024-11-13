@@ -1,0 +1,25 @@
+Order placed at: 20241113-105512
+Order Receipt
+Sandwich - small, white, toasted
+Meat: steak
+Cheese: american
+Extra Meat
+Extra Cheese
+Toppings: [lettuce]
+Extra Toppings: [lettuce]
+Sauces: [mayo]
+Order placed at: 20241113-105934
+Order Receipt
+Sandwich - large, wrap, toasted
+Meat: bacon
+Cheese: swiss
+Extra Meat
+Extra Cheese
+Toppings: [mushrooms, onions, tomatoes, pickles]
+Extra Toppings: [pickles]
+Sauces: [mayo, mustard, ranch]
+Drink: Large
+Flavor: Coke
+Chips: Lays
+Total Price: $15.40
+-----------------------------

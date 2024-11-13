@@ -61,7 +61,7 @@ public class DeliShopApp {
     }
 
     public boolean checkout (Order order, Scanner scanner) {
-        System.out.println("Checkout:");
+        System.out.println("=CHECKOUT=");
         System.out.println(order.toString()); //Display order summary
         System.out.println("Confirm order: \n" +
                 "1) Confirm\n" +
