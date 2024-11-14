@@ -1,0 +1,16 @@
+Order placed at: 20241114-150140
+Order Receipt
+Sandwich - large, wrap, toasted
+Meat: bacon
+Cheese: swiss
+Extra Meat
+Extra Cheese
+Toppings: [lettuce, peppers, onions]
+Extra Toppings: [onions]
+Sauces: [vinaigrette, thousand island, ranch]
+House Sauce: [Au Jus, DELI-cious sauce]
+Drink: Large
+Flavor: Pepsi
+Chips: Doritos
+Total Price: $15.40
+-----------------------------------------

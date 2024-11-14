@@ -200,7 +200,7 @@ public class Sandwich implements Orderable {
                      "- Mustard\n" +
                      "- Ketchup\n" +
                      "- Ranch\n" +
-                     "- Thousand Islands\n" +
+                     "- Thousand Island\n" +
                      "- Vinaigrette");
 
         String sauce;
@@ -212,7 +212,7 @@ public class Sandwich implements Orderable {
         } while (!sauce.equalsIgnoreCase("done"));
 
         //Ask user for sauce on side
-        System.out.println("Would you like to try any of our homemade sauce on the side? Type 'Done' to finish\n" +
+        System.out.println("Would you like to sample our homemade sauces on the side? Type 'Done' to finish\n" +
                 "1 - Au Jus\n" +
                 "2 - DELI-cious sauce");
 
