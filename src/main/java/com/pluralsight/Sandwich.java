@@ -12,6 +12,7 @@ public class Sandwich implements Orderable {
     private final List<String> toppings = new ArrayList<>();
     private final List<String> extraToppings = new ArrayList<>();
     private final List<String> sauces = new ArrayList<>();
+    private final List<String> sideSauces = new ArrayList<>();
     private boolean toasted;
     private boolean extraMeat;
     private boolean extraCheese;
@@ -97,7 +98,8 @@ public class Sandwich implements Orderable {
                 (extraCheese ? "\nExtra Cheese" : "") +
                 "\nToppings: " + toppings +
                 "\nExtra Toppings: " + extraToppings +
-                "\nSauces: " + sauces;
+                "\nSauces: " + sauces +
+                "\nHouse Sauce: " + sideSauces;
     }
 
     @Override
@@ -208,6 +210,30 @@ public class Sandwich implements Orderable {
                 addSauce(sauce);
             }
         } while (!sauce.equalsIgnoreCase("done"));
+
+        //Ask user for sauce on side
+        System.out.println("Would you like to try any of our homemade sauce on the side? Type 'Done' to finish\n" +
+                "1 - Au Jus\n" +
+                "2 - DELI-cious sauce");
+
+        String sideSauce;
+        do {
+            sideSauce = scanner.nextLine();
+            switch (sideSauce) {
+                case "1":
+                    sideSauces.add("Au Jus");
+                    System.out.println("Au Jus added as a side sauce");
+                    break;
+                case "2":
+                    sideSauces.add("DELI-cious sauce");
+                    System.out.println("DELI-cious sauce added as a side sauce");
+                    break;
+                case "done":
+                    break;
+                default:
+                    System.out.println("Invalid choice. Please select '1' for Au Jus, '2' for DELI-cious, or 'Done' to finish.");
+            }
+        } while (!sideSauce.equalsIgnoreCase("done"));
     }
 }
 

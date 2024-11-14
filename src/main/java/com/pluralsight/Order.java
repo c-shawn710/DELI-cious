@@ -1,8 +1,8 @@
 package com.pluralsight;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -60,22 +60,25 @@ public class Order {
         return orderDetails.toString();
     }
 
-    //Save order to a receipts file
-    public void saveToCSV() {
+    //Save order to receipts folder
+    public void saveToFolder() {
         LocalDateTime now = LocalDateTime.now();
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyyMMdd-HHmmss");
         String timestamp = now.format(dateFormatter);
+        //Set the file name with the receipts folder & the timestamp as the file name
+        String fileName = "receipts/" + timestamp + ".txt";
 
-        try (FileWriter writer = new FileWriter("receipts.txt", true)) {
+        //Write order details to the file
+        try (FileWriter writer = new FileWriter(fileName)) {
             writer.write("Order placed at: " + timestamp + "\n");
             writer.write("Order Receipt\n");
             for (Orderable item : items) {
                 writer.write(item.getDescription() + "\n");
             }
             writer.write(String.format("Total Price: $%.2f", calculateTotalPrice()));
-            writer.write("\n-----------------------------\n");
+            writer.write("\n-----------------------------------------\n");
         } catch (IOException e) {
-            System.out.println("Error saving order...");;
+            System.out.println("Error saving order...");
         }
     }
 }

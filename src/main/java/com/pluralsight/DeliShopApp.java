@@ -71,7 +71,7 @@ public class DeliShopApp {
         scanner.nextLine();
 
         if (choice == 1) {
-            order.saveToCSV();
+            order.saveToFolder();
             System.out.println("Order confirmed.");
             return true;
         } else if (choice == 0) {
