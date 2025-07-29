@@ -2,6 +2,8 @@ package com.pluralsight;
 
 import java.util.Scanner;
 
+import static com.pluralsight.Constants.*;
+
 public class Drink implements Orderable {
     private String size;
     private String flavor;
@@ -9,11 +11,11 @@ public class Drink implements Orderable {
     @Override
     public double getPrice() {
         if (size.equalsIgnoreCase("small")) {
-            return 2.00;
+            return SMALL_DRINK_PRICE;
         } else if (size.equalsIgnoreCase("medium")) {
-            return 2.50;
+            return MEDIUM_DRINK_PRICE;
         } else if (size.equalsIgnoreCase("large")) {
-            return 3.00;
+            return LARGE_DRINK_PRICE;
         }
         return 0;
     }
@@ -25,7 +27,6 @@ public class Drink implements Orderable {
 
     @Override
     public void customizeItem(Scanner scanner) {
-        String[] drinkSizes = {"Small", "Medium", "Large"};
         boolean validSize = false;
 
         while (!validSize) {
@@ -33,7 +34,7 @@ public class Drink implements Orderable {
             size = scanner.nextLine();
 
             //Check if user input is valid size
-            for (String drinkSize : drinkSizes) {
+            for (String drinkSize : DRINK_SIZES) {
                 if (size.equalsIgnoreCase(drinkSize)) {
                     validSize = true;
                     size = drinkSize; //Match capitalization with our list
@@ -46,8 +47,6 @@ public class Drink implements Orderable {
         }
 
 
-        //List of available drink flavors
-        String[] availableFlavors = {"Coke", "Pepsi", "Sprite", "Mountain Dew", "Fanta", "Dr. Pepper", "Diet Coke", "Diet Pepsi", "Coke Zero"};
         boolean validFlavor = false;
 
         while (!validFlavor) {
@@ -55,7 +54,7 @@ public class Drink implements Orderable {
             flavor = scanner.nextLine();
 
             //Check if user input is valid flavor
-            for (String availableFlavor : availableFlavors) {
+            for (String availableFlavor : AVAILABLE_DRINKS) {
                 if (flavor.equalsIgnoreCase(availableFlavor)) {
                     validFlavor = true;
                     flavor = availableFlavor; //Match capitalization with our list

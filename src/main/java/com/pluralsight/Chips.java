@@ -2,12 +2,15 @@ package com.pluralsight;
 
 import java.util.Scanner;
 
+import static com.pluralsight.Constants.AVAILABLE_CHIPS;
+import static com.pluralsight.Constants.CHIP_PRICE;
+
 public class Chips implements Orderable {
     private String type;
 
     @Override
     public double getPrice() {
-        return 1.50;
+        return CHIP_PRICE;
     }
 
     @Override
@@ -18,7 +21,6 @@ public class Chips implements Orderable {
     @Override
     public void customizeItem(Scanner scanner) {
         //List of available chips
-        String[] availableChips = {"Lays", "Ruffles", "Doritos", "Kettle", "Cheetos"};
         boolean validChips = false;
 
         while (!validChips) {
@@ -26,7 +28,7 @@ public class Chips implements Orderable {
             type = scanner.nextLine();
 
             //Check if user input is valid chips
-            for (String availableChip : availableChips) {
+            for (String availableChip : AVAILABLE_CHIPS) {
                 if (type.equalsIgnoreCase(availableChip)) {
                     validChips = true;
                     type = availableChip; //Match capitalization with our list
