@@ -11,21 +11,13 @@ public class Sandwich implements Orderable {
     private final List<String> extraToppings = new ArrayList<>();
     private final List<String> sauces = new ArrayList<>();
     private final List<String> sideSauces = new ArrayList<>();
-    private String breadType;
-    private String size;
+    private BreadType breadType;
+    private Size size;
     private String meat;
     private String cheese;
     private boolean toasted;
     private boolean extraMeat;
     private boolean extraCheese;
-
-    public void setBreadType(String breadType) {
-        this.breadType = breadType;
-    }
-
-    public void setSize(String size) {
-        this.size = size;
-    }
 
     public void setMeat(String meat) {
         this.meat = meat;
@@ -87,10 +79,32 @@ public class Sandwich implements Orderable {
     @Override
     public void customizeItem(Scanner scanner) {
         System.out.println("Choose bread type: White, Wheat, Rye, Wrap");
-        setBreadType(scanner.nextLine());
+        for (BreadType bread : BreadType.values()) {
+            System.out.println("- " + bread.name());
+        }
+
+        while (true) {
+            try {
+                breadType = BreadType.valueOf(scanner.nextLine().trim().toUpperCase());
+                break;
+            } catch (IllegalArgumentException e) {
+                System.out.println("Invalid bread. Try again: ");
+            }
+        }
 
         System.out.println("Choose size: Small(4\") - $5.50, Medium(8\") - $7.00, Large(12\") - $8.50");
-        setSize(scanner.nextLine());
+        for (Size s : Size.values()) {
+            System.out.println("- " + s.name());
+        }
+
+        while (true) {
+            try {
+                size = Size.valueOf(scanner.nextLine().trim().toUpperCase());
+                break;
+            } catch (IllegalArgumentException e) {
+                System.out.println("Invalid size. Try again: ");
+            }
+        }
 
         //Meat option
         System.out.println("Select protein: Or type 'none' for no meat\n" +
@@ -177,54 +191,53 @@ public class Sandwich implements Orderable {
         } while (!sauce.equalsIgnoreCase("done"));
 
         //Ask user for sauce on side
-        System.out.println("Would you like to sample our homemade sauces on the side? Type 'Done' to finish\n" +
-                "1 - Au Jus\n" +
-                "2 - DELI-cious sauce");
+        System.out.println("""
+                Would you like to sample our homemade sauces on the side? Type 'Done' to finish:
+                1 - Au Jus
+                2 - DELI-cious sauce
+                """);
 
         String sideSauce;
         do {
             sideSauce = scanner.nextLine();
             switch (sideSauce) {
-                case "1":
+                case "1" -> {
                     sideSauces.add("Au Jus");
                     System.out.println("Au Jus added as a side sauce");
-                    break;
-                case "2":
+                }
+                case "2" -> {
                     sideSauces.add("DELI-cious sauce");
                     System.out.println("DELI-cious sauce added as a side sauce");
-                    break;
-                case "done":
-                    break;
-                default:
-                    System.out.println("Invalid choice. Please select '1' for Au Jus, '2' for DELI-cious, or 'Done' to finish.");
+                }
+                case "done" -> {}
+                default ->
+                    System.out.println(
+                            "Invalid choice. Please select '1' for Au Jus, '2' for DELI-cious, or 'Done' to finish.");
             }
         } while (!sideSauce.equalsIgnoreCase("done"));
     }
 
     private double getBaseSandwichPrice() {
-        return switch (size.toLowerCase()) {
-            case "small" -> SMALL_SANDWICH_PRICE;
-            case "medium" -> MEDIUM_SANDWICH_PRICE;
-            case "large" -> LARGE_SANDWICH_PRICE;
-            default -> throw new IllegalStateException("Invalid sandwich size: " + size);
+        return switch (size) {
+            case SMALL -> SMALL_SANDWICH_PRICE;
+            case MEDIUM -> MEDIUM_SANDWICH_PRICE;
+            case LARGE -> LARGE_SANDWICH_PRICE;
         };
     }
 
     private double getExtraMeatPrice() {
-        return switch (size.toLowerCase()) {
-            case "small" -> EXTRA_MEAT_FOR_SMALL_SANDWICH_PRICE;
-            case "medium" -> EXTRA_MEAT_FOR_MEDIUM_SANDWICH_PRICE;
-            case "large" -> EXTRA_MEAT_FOR_LARGE_SANDWICH_PRICE;
-            default -> throw new IllegalStateException("Invalid sandwich size: " + size);
+        return switch (size) {
+            case SMALL -> EXTRA_MEAT_FOR_SMALL_SANDWICH_PRICE;
+            case MEDIUM -> EXTRA_MEAT_FOR_MEDIUM_SANDWICH_PRICE;
+            case LARGE -> EXTRA_MEAT_FOR_LARGE_SANDWICH_PRICE;
         };
     }
 
     private double getExtraCheesePrice() {
-        return switch (size.toLowerCase()) {
-            case "small" -> EXTRA_CHEESE_FOR_SMALL_SANDWICH_PRICE;
-            case "medium" -> EXTRA_CHEESE_FOR_MEDIUM_SANDWICH_PRICE;
-            case "large" -> EXTRA_CHEESE_FOR_LARGE_SANDWICH_PRICE;
-            default -> throw new IllegalStateException("Invalid sandwich size: " + size);
+        return switch (size) {
+            case SMALL -> EXTRA_CHEESE_FOR_SMALL_SANDWICH_PRICE;
+            case MEDIUM -> EXTRA_CHEESE_FOR_MEDIUM_SANDWICH_PRICE;
+            case LARGE -> EXTRA_CHEESE_FOR_LARGE_SANDWICH_PRICE;
         };
     }
 }

@@ -41,18 +41,13 @@ public class Order {
     //String summary of the order
     @Override
     public String toString() {
-        //Initialize StringBuilder with a starting value
         StringBuilder orderDetails = new StringBuilder("Order Details:\n");
 
-        //Append each item's description
         for (Orderable item : items) {
             orderDetails.append(item.getDescription()).append("\n");
         }
 
-        //Append each item's price
         orderDetails.append("Total price: $").append(String.format("%.2f", calculateTotalPrice()));
-
-        //Convert StringBuilder back to a single string
         return orderDetails.toString();
     }
 
