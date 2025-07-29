@@ -12,28 +12,24 @@ import java.util.Scanner;
 public class Order {
     private final List<Orderable> items = new ArrayList<>();
 
-    //Add one or more Sandwiches to the order
     public void addSandwich(Scanner scanner) {
         Sandwich sandwich = new Sandwich();
         sandwich.customizeItem(scanner);
         items.add(sandwich);
     }
 
-    //Add a Drink to the order
     public void addDrink(Scanner scanner) {
         Drink drink = new Drink();
         drink.customizeItem(scanner);
         items.add(drink);
     }
 
-    //Add Chips to the order
     public void addChips(Scanner scanner) {
         Chips chips = new Chips();
         chips.customizeItem(scanner);
         items.add(chips);
     }
 
-    //Calculate total price of the order
     public double calculateTotalPrice() {
         double total = 0;
         for (Orderable item : items) {

@@ -1,0 +1,13 @@
+Order placed at: 20250729-005002
+Order Receipt
+Sandwich - small, white, toasted
+Meat: steak
+Cheese: american
+Extra Meat
+Extra Cheese
+Toppings: []
+Extra Toppings: []
+Sauces: []
+House Sauce: []
+Total Price: $6.30
+-----------------------------------------

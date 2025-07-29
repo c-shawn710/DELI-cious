@@ -1,0 +1,16 @@
+Order placed at: 20241115-130832
+Order Receipt
+Sandwich - small, white, toasted
+Meat: steak
+Cheese: american
+Extra Meat
+Extra Cheese
+Toppings: [lettuce, peppers, onions]
+Extra Toppings: [lettuce]
+Sauces: [mayo]
+House Sauce: [Au Jus, DELI-cious sauce]
+Drink: Small
+Flavor: Coke
+Chips: Lays
+Total Price: $9.80
+-----------------------------------------

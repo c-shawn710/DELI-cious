@@ -25,7 +25,6 @@ public class Drink implements Orderable {
 
     @Override
     public void customizeItem(Scanner scanner) {
-        //List of available drink sizes
         String[] drinkSizes = {"Small", "Medium", "Large"};
         boolean validSize = false;
 

@@ -1,0 +1,16 @@
+Order placed at: 20241114-161336
+Order Receipt
+Sandwich - medium, rye, toasted
+Meat: ham
+Cheese: provolone
+Extra Meat
+Extra Cheese
+Toppings: [tomatoes, onions, lettuce]
+Extra Toppings: [lettuce]
+Sauces: [thousand island]
+House Sauce: [Au Jus, DELI-cious sauce]
+Drink: Medium
+Flavor: Sprite
+Chips: Kettle
+Total Price: $12.60
+-----------------------------------------
