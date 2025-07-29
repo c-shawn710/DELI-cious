@@ -5,19 +5,19 @@ import java.util.Scanner;
 import static com.pluralsight.Constants.*;
 
 public class Drink implements Orderable {
-    private String size;
+    private Size size;
     private String flavor;
 
     @Override
     public double getPrice() {
-        if (size.equalsIgnoreCase("small")) {
-            return SMALL_DRINK_PRICE;
-        } else if (size.equalsIgnoreCase("medium")) {
-            return MEDIUM_DRINK_PRICE;
-        } else if (size.equalsIgnoreCase("large")) {
-            return LARGE_DRINK_PRICE;
+        if (size == null) {
+            throw new IllegalStateException("Drink size is not set.");
         }
-        return 0;
+        return switch (size) {
+            case SMALL -> SMALL_DRINK_PRICE;
+            case MEDIUM -> MEDIUM_DRINK_PRICE;
+            case LARGE -> LARGE_DRINK_PRICE;
+        };
     }
 
     @Override
@@ -31,18 +31,13 @@ public class Drink implements Orderable {
 
         while (!validSize) {
             System.out.println("Choose drink size:\nSmall - $2.00\nMedium - $2.50\nLarge - $3.00");
-            size = scanner.nextLine();
+            String sizeInput = scanner.nextLine().trim().toUpperCase();
 
-            //Check if user input is valid size
-            for (String drinkSize : DRINK_SIZES) {
-                if (size.equalsIgnoreCase(drinkSize)) {
-                    validSize = true;
-                    size = drinkSize; //Match capitalization with our list
-                    break;
-                }
-            }
-            if (!validSize) {
-                System.out.println("Please select: Small, Medium, or Large");
+            try {
+                size = Size.valueOf(sizeInput);
+                validSize = true;
+            } catch (IllegalArgumentException e ) {
+                System.out.println("Invalid size. Please enter Small, Medium, or Large.");
             }
         }
 
@@ -50,9 +45,12 @@ public class Drink implements Orderable {
         boolean validFlavor = false;
 
         while (!validFlavor) {
-            System.out.println("Choose drink flavor:\nCoke, Pepsi, Sprite, Mountain Dew, Fanta, Dr. Pepper, Diet Coke, Diet Pepsi, Coke Zero");
-            flavor = scanner.nextLine();
+            System.out.println("Choose drink flavor:");
+            for (String drink : AVAILABLE_DRINKS) {
+                System.out.println("- " + drink);
+            }
 
+            flavor = scanner.nextLine();
             //Check if user input is valid flavor
             for (String availableFlavor : AVAILABLE_DRINKS) {
                 if (flavor.equalsIgnoreCase(availableFlavor)) {

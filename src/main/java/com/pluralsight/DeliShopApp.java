@@ -42,20 +42,17 @@ public class DeliShopApp {
             int choice = scanner.nextInt();
             scanner.nextLine();
 
-            if (choice == 1) {
-                order.addSandwich(scanner);
-            } else if (choice == 2){
-                order.addDrink(scanner);
-            } else if (choice == 3) {
-                order.addChips(scanner);
-            } else if (choice == 4) {
-                if (checkout(order, scanner)) {
-                    ordering = false;
+            switch (choice) {
+                case 1 -> order.addSandwich(scanner);
+                case 2 -> order.addDrink(scanner);
+                case 3 -> order.addChips(scanner);
+                case 4 -> {
+                    if (checkout(order, scanner)) {
+                        ordering = false;
+                    }
                 }
-            } else if (choice == 0) {
-                ordering = false;
-            } else {
-                System.out.println("Invalid choice. Please select a valid option: ");
+                case 0 -> ordering = false;
+                default -> System.out.println("Invalid choice. Please select a valid option.");
             }
         }
     }
@@ -70,15 +67,17 @@ public class DeliShopApp {
         int choice = scanner.nextInt();
         scanner.nextLine();
 
-        if (choice == 1) {
-            order.saveToFolder();
-            System.out.println("Order confirmed.");
-            return true;
-        } else if (choice == 0) {
-            System.out.println("Order cancelled.");
-            return false;
-        } else {
-            System.out.println("Invalid input. Please enter '1' to confirm or '0' to cancel.");
+        switch (choice) {
+            case 1 -> {
+                order.saveToFolder();
+                System.out.println("Order confirmed.");
+                return true;
+            }
+            case 0 -> {
+                System.out.println("Order cancelled.");
+                return false;
+            }
+            default -> System.out.println("Invalid input. Please enter '1' or confirm or '0' to cancel.");
         }
         return false;
     }

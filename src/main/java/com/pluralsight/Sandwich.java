@@ -78,7 +78,7 @@ public class Sandwich implements Orderable {
 
     @Override
     public void customizeItem(Scanner scanner) {
-        System.out.println("Choose bread type: White, Wheat, Rye, Wrap");
+        System.out.println("Choose bread type:");
         for (BreadType bread : BreadType.values()) {
             System.out.println("- " + bread.name());
         }
